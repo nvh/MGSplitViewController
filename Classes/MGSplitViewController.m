@@ -564,6 +564,10 @@
 		if (_delegate && [_delegate respondsToSelector:@selector(splitViewController:barButtonItemForViewController:)]) {
             _barButtonItem = [_delegate  splitViewController:self
                               barButtonItemForViewController:self.masterViewController];
+            if(![_barButtonItem.target respondsToSelector:_barButtonItem.action]) {
+                _barButtonItem.target = self;
+                _barButtonItem.action = @selector(showMasterPopover:);
+            }
         } else {
             _barButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Master", nil) 
                                                               style:UIBarButtonItemStyleBordered 
