@@ -103,6 +103,10 @@ typedef enum _MGSplitViewDividerStyle {
 		  popoverController:(UIPopoverController*)pc 
   willPresentViewController:(UIViewController *)aViewController;
 
+//If implemented, this barButtonItem will be used for the viewController
+- (UIBarButtonItem*)splitViewController:(MGSplitViewController*)svc 
+         barButtonItemForViewController:(UIViewController*)aViewController;
+
 // Called when the split orientation will change (from vertical to horizontal, or vice versa).
 - (void)splitViewController:(MGSplitViewController*)svc willChangeSplitOrientationToVertical:(BOOL)isVertical;
 

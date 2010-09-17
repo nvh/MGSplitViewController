@@ -561,10 +561,16 @@
 		[self.masterViewController viewDidDisappear:NO];
 		
 		// Create and configure _barButtonItem.
-		_barButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Master", nil) 
-														  style:UIBarButtonItemStyleBordered 
-														 target:self 
-														 action:@selector(showMasterPopover:)];
+		if (_delegate && [_delegate respondsToSelector:@selector(splitViewController:barButtonItemForViewController:)]) {
+            _barButtonItem = [_delegate  splitViewController:self
+                              barButtonItemForViewController:self.masterViewController];
+        } else {
+            _barButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Master", nil) 
+                                                              style:UIBarButtonItemStyleBordered 
+                                                             target:self 
+                                                             action:@selector(showMasterPopover:)];
+        }
+        
 		
 		// Inform delegate of this state of affairs.
 		if (_delegate && [_delegate respondsToSelector:@selector(splitViewController:willHideViewController:withBarButtonItem:forPopoverController:)]) {
